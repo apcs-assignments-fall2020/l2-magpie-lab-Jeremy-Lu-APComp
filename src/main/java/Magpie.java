@@ -31,6 +31,7 @@ public class Magpie
     public String getResponse(String statement)
     {
         String response = "";
+        String trimmed_stat = statement.trim();
         if (statement.indexOf("no") >= 0)
         {
             response = "Why so negative?";
@@ -41,6 +42,34 @@ public class Magpie
                 || statement.indexOf("brother") >= 0)
         {
             response = "Tell me more about your family.";
+        }
+        else if (statement.indexOf("dog") >= 0
+                || statement.indexOf("cat") >= 0)
+        {
+            response = "Tell me more about your pets.";
+        }
+        else if (statement.indexOf("Nathan") >= 0)
+        {
+            response = "He sounds like a good teacher.";
+        }
+        else if (statement.indexOf("cool") >=0)
+        {
+            response = "That's cool.";
+        }
+        else if (statement.indexOf("food") >=0)
+        {
+            response = "What is your favorite food?";
+        }
+        else if (statement.indexOf("soccer") >= 0
+                || statement.indexOf("tennis") >= 0
+                || statement.indexOf("football") >= 0
+                || statement.indexOf("baseball") >= 0)
+        {
+            response = "Tell me more about your favorite sport.";
+        }
+        else if (trimmed_stat.length() == 0)
+        {
+            response = "Please say something.";
         }
         else
         {
@@ -55,7 +84,7 @@ public class Magpie
      */
     public String getRandomResponse()
     {
-        final int NUMBER_OF_RESPONSES = 4;
+        final int NUMBER_OF_RESPONSES = 6;
         double r = Math.random();
         int whichResponse = (int)(r * NUMBER_OF_RESPONSES);
         String response = "";
@@ -75,6 +104,14 @@ public class Magpie
         else if (whichResponse == 3)
         {
             response = "You don't say.";
+        }
+        else if (whichResponse == 4)
+        {
+            response = "Great.";
+        }
+        else if (whichResponse == 5)
+        {
+            response = "Precisely.";
         }
     
         return response;
