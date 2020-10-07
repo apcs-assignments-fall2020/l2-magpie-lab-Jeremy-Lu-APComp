@@ -71,6 +71,10 @@ public class Magpie
         {
             response = "Please say something.";
         }
+        else if (findWord(statement, "I want") >= 0)
+      {
+         response = transformIWantStatement(statement);
+      }
         else
         {
             response = getRandomResponse();
@@ -142,11 +146,18 @@ public int findWord(String str, String word) {
      * @param statement the user statement, assumed to contain "I want"
      * @return the transformed statement
      */
-    public String transformIWantStatement(String statement)
-    {
-        //your code here
-        return "";
-    }
+    public String transformIWantStatement(String statement){
+    statement = statement.trim();
+    int length = statement.length();
+      String lastCharacter = statement.substring(length - 1);
+      if (lastCharacter.equals("."))
+      {
+         statement = statement.substring(0, length - 1);
+      }
+      int add = findWord(statement, "I want");
+      String rest = statement.substring(add + 7);
+      return "Would you really be happy if you had " + rest + "?";
+   }
 
     /**
      * Take a statement with "I <something> you" and transform it into 
