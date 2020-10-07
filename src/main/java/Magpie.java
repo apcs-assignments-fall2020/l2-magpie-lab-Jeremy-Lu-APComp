@@ -36,7 +36,7 @@ public class Magpie
         {
             response = "Why so negative?";
         }
-        else if (statement.indexOf("mother") >= 0
+        else if (findWord(statement, "mother") >= 0
                 || statement.indexOf("father") >= 0
                 || statement.indexOf("sister") >= 0
                 || statement.indexOf("brother") >= 0)
@@ -126,10 +126,31 @@ public class Magpie
 
     // The method returns the index of the first character in word
     // if it is found, and returns -1 otherwise. 
-    public int findWord(String str, String word) {
-        return -1;
+    
+public int findWord(String str, String word) {
+  int index = str.indexOf(word);
+  int before = index-1;
+  int after = index + word.length();
+  if(before >= 0 && after < str.length()){
+    if(Character.isLetter(str.charAt(before)) && Character.isLetter(str.charAt(after))){
+      return -1;
     }
-
+    else{
+      return index;
+    }
+  }
+  if(after < str.length()){
+    if(Character.isLetter(str.charAt(after))){
+      return -1;
+    }
+  }
+  if(before > 0){
+    if(Character.isLetter(str.charAt(before))){
+      return -1;
+    }
+  }
+  return index;
+  }
     
     // We will work on the following methods later!
 
