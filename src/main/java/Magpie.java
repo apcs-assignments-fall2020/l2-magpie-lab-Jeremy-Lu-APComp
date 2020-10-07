@@ -128,19 +128,10 @@ public class Magpie
     // if it is found, and returns -1 otherwise. 
     
 public int findWord(String str, String word) {
-  int index = str.indexOf(word);
-  int before = index-1;
-  int after = index + word.length();
-  if(before >= 0 && after < str.length()){
-    //We need to use or since as long as one of them is a character it would classify as a sunstring. Doesn't have to be both
-    if(Character.isLetter(str.charAt(before)) || Character.isLetter(str.charAt(after))){
-      return -1;
-    }
-  }
+    str = " " + str.toLowerCase() + " ";
+    word = " " + word.toLowerCase() + " ";
 
-  // Other checks were redunant since it isn't possible for before and after to be outside the bounds of the string because if they were then indexOf wouldnt have found a valid value
-
-  return index;
+    return str.indexOf(word);
 }
     
     // We will work on the following methods later!
