@@ -37,33 +37,33 @@ public class Magpie
             response = "Why so negative?";
         }
         else if (findWord(statement, "mother") >= 0
-                || statement.indexOf("father") >= 0
-                || statement.indexOf("sister") >= 0
-                || statement.indexOf("brother") >= 0)
+                || findWord(statement, "father") >= 0
+                || findWord(statement, "sister") >= 0
+                || findWord(statement, "brother") >= 0)
         {
             response = "Tell me more about your family.";
         }
-        else if (statement.indexOf("dog") >= 0
-                || statement.indexOf("cat") >= 0)
+        else if (findWord(statement, "dog") >= 0
+                || findWord(statement, "cat") >= 0)
         {
             response = "Tell me more about your pets.";
         }
-        else if (statement.indexOf("Nathan") >= 0)
+        else if (findWord(statement, "nathan") >= 0)
         {
             response = "He sounds like a good teacher.";
         }
-        else if (statement.indexOf("cool") >=0)
+        else if (findWord(statement, "cool") >=0)
         {
             response = "That's cool.";
         }
-        else if (statement.indexOf("food") >=0)
+        else if (findWord(statement, "mother") >=0)
         {
             response = "What is your favorite food?";
         }
-        else if (statement.indexOf("soccer") >= 0
-                || statement.indexOf("tennis") >= 0
-                || statement.indexOf("football") >= 0
-                || statement.indexOf("baseball") >= 0)
+        else if (findWord(statement, "soccer") >= 0
+                || findWord(statement, "tennis") >= 0
+                || findWord(statement, "basketball") >= 0
+                || findWord(statement, "baseball") >= 0)
         {
             response = "Tell me more about your favorite sport.";
         }
@@ -132,25 +132,16 @@ public int findWord(String str, String word) {
   int before = index-1;
   int after = index + word.length();
   if(before >= 0 && after < str.length()){
-    if(Character.isLetter(str.charAt(before)) && Character.isLetter(str.charAt(after))){
-      return -1;
-    }
-    else{
-      return index;
-    }
-  }
-  if(after < str.length()){
-    if(Character.isLetter(str.charAt(after))){
+    //We need to use or since as long as one of them is a character it would classify as a sunstring. Doesn't have to be both
+    if(Character.isLetter(str.charAt(before)) || Character.isLetter(str.charAt(after))){
       return -1;
     }
   }
-  if(before > 0){
-    if(Character.isLetter(str.charAt(before))){
-      return -1;
-    }
-  }
+
+  // Other checks were redunant since it isn't possible for before and after to be outside the bounds of the string because if they were then indexOf wouldnt have found a valid value
+
   return index;
-  }
+}
     
     // We will work on the following methods later!
 
