@@ -71,10 +71,22 @@ public class Magpie
         {
             response = "Please say something.";
         }
+        else if (findWord(statement, "I want to") >= 0)
+        {
+         response = transformIWantToStatement(statement);
+        }
         else if (findWord(statement, "I want") >= 0)
-      {
+        {
          response = transformIWantStatement(statement);
-      }
+        }
+        else if (findWord(statement, "I") >= 0 && findWord(statement, "you") >= 0 && findWord(statement, "I") < findWord(statement, "you"))
+        {
+         response = transformIYouStatement(statement);
+        }
+        else if (findWord(statement, "you") >= 0 && findWord(statement, "me") >= 0 && findWord(statement, "you") < findWord(statement, "me"))
+        {
+         response = transformYouMeStatement(statement);
+        }
         else
         {
             response = getRandomResponse();
@@ -147,13 +159,13 @@ public int findWord(String str, String word) {
      * @return the transformed statement
      */
     public String transformIWantStatement(String statement){
-    statement = statement.trim();
-    int length = statement.length();
-      String last_character = statement.substring(length-1); //this basically defines what the last character is.
-      if(last_character == "."){ // this detects that the last character is a period (meaning that the character before it is...
-        //what we want to extract)
-          //something goes here
-      }
+    String trim = statement.trim().toLowerCase();
+    if(trim.indexOf("i want ") >= 0){
+        String trim_sub = trim.substring(trim.indexOf("i want ") + 7);
+        String response_sub = trim_sub.trim();
+        return "Would you really be happy if you had " + response_sub + "?";
+    }
+    return "";
    }
 
     /**
@@ -164,8 +176,11 @@ public int findWord(String str, String word) {
      */
     public String transformIYouStatement(String statement)
     {
-        //your code here
-        return "";
+        String low = statement.toLowerCase();
+        int index_i = low.indexOf("i ");
+        int index_you = low.indexOf(" you");
+        String between = low.substring((index_i+2), (index_you));
+        return "Why do you " + between + " me?";
     }
 
     /**
@@ -176,8 +191,13 @@ public int findWord(String str, String word) {
      */
     public String transformIWantToStatement(String statement)
     {
-        // your code here
-        return "";
+    String trim = statement.trim().toLowerCase();
+    if(trim.indexOf("i want to ") >= 0){
+        String trim_sub = trim.substring(trim.indexOf("i want to ") + 10);
+        String response_sub = trim_sub.trim();
+        return "What would it mean to " + response_sub + "?";
+        }
+    return "";
     }
 
 
@@ -191,7 +211,10 @@ public int findWord(String str, String word) {
      */
     public String transformYouMeStatement(String statement)
     {
-        // your code here
-        return "";
+        String low = statement.toLowerCase();
+        int index_you = low.indexOf("you ");
+        int index_me = low.indexOf(" me");
+        String between = low.substring((index_you+4), (index_me));
+        return "What makes you think that I " + between + " you?";
     }
 }
