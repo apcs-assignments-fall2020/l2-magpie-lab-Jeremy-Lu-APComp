@@ -149,14 +149,11 @@ public int findWord(String str, String word) {
     public String transformIWantStatement(String statement){
     statement = statement.trim();
     int length = statement.length();
-      String lastCharacter = statement.substring(length - 1);
-      if (lastCharacter.equals("."))
-      {
-         statement = statement.substring(0, length - 1);
+      String last_character = statement.substring(length-1); //this basically defines what the last character is.
+      if(last_character == "."){ // this detects that the last character is a period (meaning that the character before it is...
+        //what we want to extract)
+          //something goes here
       }
-      int add = findWord(statement, "I want");
-      String rest = statement.substring(add + 7);
-      return "Would you really be happy if you had " + rest + "?";
    }
 
     /**
